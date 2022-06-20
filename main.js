@@ -36,19 +36,26 @@ function draw() {
      if(scoreLeftWrist > 0.2) {
 
     circle(leftWristX,leftWristY,20);
-    InNumberLeftWristY = Number(leftWristY);
-    remove_decimals = floor(InNumberLeftWristY);
-    song = "music.mp3";
-    document.getElementById("song").innerHTML = "Song Playing =" ;
-    song.play(song_2);
+    document.getElementById("song").innerHTML = "Song Playing = Song_1" ;
+    song.play(song_1);
+     }
+
+     if(scoreRightWrist > 0.2) {
+        circle(rightWristX,rightWristY,20);
+        document.getElementById("song").innerHTML = "Song Playing = Song_2";
+        song_1.stop();
+        song_2.play();
      }
 }
 
 function gotPoses(results) {
     if(results.length > 0) {
         
-        scoreLeftWrist = results[0].pose.keypoints[9].score;
+        
         console.log(results);
+        scoreLeftWrist = results[0].pose.keypoints[9].score;
+       scoreRightWrist = results[0].pose.keypoints[10].score;
+       console.log("Score Left Wrist = " + scoreLeftWrist + "Score Right Wrist = " + scoreRightWrist);
         leftWristX = results[0].pose.leftWrist.x;
         leftWristY = results[0].pose.leftWrist.y;
         console.log("Left Wrist X = " + leftWristX + "Left Wrsit Y =" + leftWristY);
